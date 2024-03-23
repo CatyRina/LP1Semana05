@@ -2,30 +2,30 @@ using System;
 
 namespace MyGame
 {
+    public enum PowerUp
+    {
+        Health,
+        Shield
+    }
+
     public class Enemy
     {
         private string name;
         private int health;
         private float shield;
 
-        // Constructor
         public Enemy(string name)
         {
-            SetName(name);
+            this.name = name;
             health = 100;
             shield = 0;
-        }
-
-        public string GetName()
-        {
-            return name;
         }
 
         public void SetName(string newName)
         {
             if (newName.Length > 8)
             {
-                name = newName.Substring(0, 8);
+                name = newName.Substring(0, 8); 
             }
             else
             {
@@ -33,10 +33,18 @@ namespace MyGame
             }
         }
 
+
+        public string GetName()
+        {
+            return name;
+        }
+
+
         public int GetHealth()
         {
             return health;
         }
+
 
         public float GetShield()
         {
@@ -53,6 +61,22 @@ namespace MyGame
                 health -= (int)damageStillToInflict; 
                 if (health < 0)
                     health = 0;
+            }
+        }
+
+        public void PickupPowerUp(PowerUp powerUp, float value)
+        {
+            if (powerUp == PowerUp.Health)
+            {
+                health += (int)value;
+                if (health > 100)
+                    health = 100;
+            }
+            else if (powerUp == PowerUp.Shield)
+            {
+                shield += value;
+                if (shield > 100)
+                    shield = 100;
             }
         }
     }

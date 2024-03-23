@@ -26,6 +26,7 @@ namespace MyGame
             foreach (var enemy in enemies)
             {
                 Console.WriteLine($"{enemy.GetName(),-8} {enemy.GetHealth(),-8} {enemy.GetShield(),-8}");
+                
             }
         }
     }
