@@ -10,9 +10,15 @@ namespace MyGame
 
     public class Enemy
     {
+        private static int totalPowerUps;
         private string name;
         private int health;
         private float shield;
+
+        static Enemy()
+        {
+            totalPowerUps = 0;
+        }
 
         public Enemy(string name)
         {
@@ -21,36 +27,30 @@ namespace MyGame
             shield = 0;
         }
 
-        public void SetName(string newName)
-        {
-            if (newName.Length > 8)
-            {
-                name = newName.Substring(0, 8); 
-            }
-            else
-            {
-                name = newName;
-            }
-        }
-
-
         public string GetName()
         {
             return name;
         }
 
-
+   
         public int GetHealth()
         {
             return health;
         }
 
-
+        
         public float GetShield()
         {
             return shield;
         }
 
+    
+        public static int GetTotalPowerUps()
+        {
+            return totalPowerUps;
+        }
+
+        
         public void TakeDamage(float damage)
         {
             shield -= damage;
@@ -64,8 +64,10 @@ namespace MyGame
             }
         }
 
+    
         public void PickupPowerUp(PowerUp powerUp, float value)
         {
+
             if (powerUp == PowerUp.Health)
             {
                 health += (int)value;
@@ -78,6 +80,8 @@ namespace MyGame
                 if (shield > 100)
                     shield = 100;
             }
+
+            totalPowerUps++; 
         }
     }
 }
